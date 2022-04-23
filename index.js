@@ -10,7 +10,7 @@ const fs = require('fs');
 const limit = RateLimit(5);
 
 // number of pages to scrap in the website...
-const page = 10;
+const page = 100;
 
 //appending the header of the csv file
 fs.writeFile('scraped.csv', 'title,url,references,upvotes,answers\n', err => {
