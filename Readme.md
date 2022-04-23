@@ -6,6 +6,7 @@
 * then initialize the following variables:-
     * PASSWORD={your mongodb atlas password}
     * USER_NAME={your mongodb atlas username}
+    * DB_NAME={name of the database}
 * Then run npm install
 * Then run node index.js and it will start scraping stackoverflow questions webpages..
 
