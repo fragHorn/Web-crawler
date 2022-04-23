@@ -19,7 +19,7 @@ fs.writeFile('scraped.csv', 'title,url,references,upvotes,answers\n', err => {
 });
 
 //setting the limit of concurrent request to 5
-const scrapper = async (callback) => {
+const scrapper = async () => {
     const cluster = await Cluster.launch({
         concurrency: Cluster.CONCURRENCY_PAGE,
         maxConcurrency: 5,
