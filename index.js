@@ -87,9 +87,11 @@ const scrapper = async () => {
         await cluster.queue(`https://stackoverflow.com/questions?tab=newest&page=${count}`);
         crawler(count+1);
     }
-    //retrieving all the data from the database and storing it in a .csv file...
+    
+    //calling the function to add the urls to queue
     await crawler(1);
     await cluster.idle();
+    //retrieving all the data from the database and storing it in a .csv file...
     const res = await Questions.retrieveAll();
     
     //appending all the question in the scraped.csv file
