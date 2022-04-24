@@ -13,6 +13,7 @@
 #### I have used the following packages
 
 * puppeteer-cluster
+* puppeteer
 * async-sema
 * dotenv
 * fs
