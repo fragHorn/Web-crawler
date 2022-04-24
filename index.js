@@ -19,7 +19,7 @@ fs.writeFile('scraped.csv', 'title,url,references,upvotes,answers\n', err => {
 });
 
 //setting the limit of concurrent request to 5
-const scrapper = async (callback) => {
+const scrapper = async () => {
     const cluster = await Cluster.launch({
         concurrency: Cluster.CONCURRENCY_PAGE,
         maxConcurrency: 5,
@@ -75,12 +75,20 @@ const scrapper = async (callback) => {
     });
 
     //creating the queue of actions for clusters to perform... here
-    for(let i = 1;i<=page;i++)
-        await cluster.queue(`https://stackoverflow.com/questions?tab=newest&page=${i}`);
+    // for(let i = 1;i<=page;i++)
+    //     await cluster.queue(`https://stackoverflow.com/questions?tab=newest&page=${i}`);
     
-    await cluster.idle();
+    // await cluster.idle();
     
+    //recursive function to add url's to the queue for clusters
+    const crawler = async (count) => {
+        if(count > page)
+            return;
+        await cluster.queue(`https://stackoverflow.com/questions?tab=newest&page=${count}`);
+    }
     //retrieving all the data from the database and storing it in a .csv file...
+    await crawler(1);
+    await cluster.idle();
     const res = await Questions.retrieveAll();
     
     //appending all the question in the scraped.csv file
