@@ -85,6 +85,7 @@ const scrapper = async () => {
         if(count > page)
             return;
         await cluster.queue(`https://stackoverflow.com/questions?tab=newest&page=${count}`);
+        crawler(count+1);
     }
     //retrieving all the data from the database and storing it in a .csv file...
     await crawler(1);
